@@ -78,9 +78,10 @@ Overall, I decided to use the NGNIX ingress controller because of its high flexi
 
 [_https://stacksimplify.com/azure-aks/azure-kubernetes-service-ingress-basics/_](https://stacksimplify.com/azure-aks/azure-kubernetes-service-ingress-basics/)
 
-As you can see in the diagram, there is an AKS Load Balancer upfront the cluster that can be accessed via the public IP. Then it forwards the traffic according to the external port of the ingress controller's service of type Load Balancer. Ingress controller then approaches the ingress resource and in accordance with the defined ingress rule the traffic is transferred to the service of the application and then to the pod.
+As you can see in the diagram, there is an AKS Load Balancer upfront in the cluster that can be accessed via the public IP. Then it forwards the traffic according to the external port of the ingress controller’s service of type Load Balancer. The Ingress controller then approaches the ingress resource and in accordance with the defined ingress rule the traffic is transferred to the service of the application and then to the pod. 
 
-We use single ingress rule resource that defines the rules for all services. We also use public domain from Azure, namely oefenpraktijkapi.westeurope.cloudapp.azure.com .
+We use a single ingress rule resource that defines the rules for all services. We also use public domain from Azure, namely oefenpraktijkapi.westeurope.cloudapp.azure.com . 
+
 
 Microservice can be accessed in a following way:
 
@@ -92,7 +93,7 @@ Example:
 
 ## TLS termination
 
-We use TLS termination for our endpoints, meaning that ingress protects the path by SSL, however communication between ingress and service happens via http because the traffic is inside of the cluster.
+We use TLS termination for our endpoints, meaning that ingress protects the path by SSL, however, communication between ingress and service happens via HTTP because the traffic is inside of the cluster. 
 
 # References
 

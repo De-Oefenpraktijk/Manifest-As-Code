@@ -1,0 +1,5 @@
+bases:
+  - ./Ingress
+  - ./Profile
+  - ./Room
+  - ./Social

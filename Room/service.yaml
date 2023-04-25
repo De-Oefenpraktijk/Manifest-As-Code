@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: room-service
+  namespace: ingress-basic
+spec:
+  selector:
+    app: room-service
+  ports:
+  - port: 80

@@ -1,0 +1,51 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: room-service
+  namespace: ingress-basic
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: room-service
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: room-service
+    spec:
+      containers:
+        - name: room-service
+          image: oefenpraktijkregistry.azurecr.io/roomservice:v0.6
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          env:
+          - name: DatabaseSettings__ConnectionString
+            valueFrom:
+              secretKeyRef:
+                name: env-secret
+                key: mongo
+          resources:
+            limits:
+              memory: 1000M
+            requests:
+              cpu: 100m
+              memory: 100M
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        kubernetes.io/os: linux
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600

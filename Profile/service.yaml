@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: profile-service
+  namespace: ingress-basic
+spec:
+  ports:
+    - name: port80
+      protocol: TCP
+      port: 80
+      targetPort: 80
+  selector:
+    app: profile-service
+  type: ClusterIP # 

@@ -1,0 +1,48 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: room-ingress
+  namespace: ingress-basic
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  tls:
+  - secretName: certsecret
+  rules:
+  - host: oefenpraktijkapi.westeurope.cloudapp.azure.com
+    http:
+      paths:
+      - path: /room(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: room-service
+            port:
+              number: 80
+      - path: /social(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: social-service
+            port:
+              number: 80 
+      - path: /profile(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: profile-service
+            port:
+              number: 80 
+      - path: /(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: room-service
+            port:
+              number: 80
+
+
+              

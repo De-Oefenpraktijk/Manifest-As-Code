@@ -17,9 +17,9 @@ At the moment we run the minimal operatable configuration of the Kubernetes clus
 
 When the cluster is in the production stage, I would recommend keeping the workloads (e.g. APIs) segregated from infrastructure nodes. This will assure that nothing throttles the control plane (no noisy neighbours for infra nodes).
 
-# Infrastructure as Code
+# Manifest as Code
 
-I created a separate repository ([https://github.com/De-Oefenpraktijk/Infra-As-Code](https://github.com/De-Oefenpraktijk/Infra-As-Code)) that contains all the **yaml** files for the deployment of the application and a set of instructions for cluster deployment.
+I created a separate repository ([https://github.com/De-Oefenpraktijk/Manifest-As-Code](https://github.com/De-Oefenpraktijk/Manifest-As-Code)) that contains all the **yaml** files for the deployment of the application and a set of instructions for cluster deployment.
 
 I used Kustomize ([https://kustomize.io/](https://kustomize.io/)) manifest so that you can apply the whole application with just one command ( **kubectl apply -k .** ) in the root of the folder. Kustomize will apply all the yamls in the correct order.
 
